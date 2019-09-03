@@ -60,7 +60,7 @@ export class GitHubClient {
     }
 
     private resetToken(token: Token) {
-        if (token.ratelimitRemaining > this.requestCostPrediction * this.maxConcurrentReqNumber) return;
+        if (this.hasSufficientRemaing(token)) return;
         let resetTime = new Date(token.ratelimitReset).getTime() - new Date().getTime() + 1000; // add 1s to ensure reset on server side
         if (resetTime < 0) {
             this.logger.error(`Something wrong with rate limit maintain.`);
@@ -85,7 +85,7 @@ export class GitHubClient {
             if (this.concurrentReqNumber >= this.maxConcurrentReqNumber) {
                 return false;
             }
-            let availableTokens = this.tokens.filter(c => c.ratelimitRemaining > this.requestCostPrediction * this.maxConcurrentReqNumber);
+            let availableTokens = this.tokens.filter(this.hasSufficientRemaing);
             if (availableTokens.length === 0) {
                 this.logger.warn(`No avialable token found for now, will try later`);
                 return false;
@@ -97,6 +97,10 @@ export class GitHubClient {
                 interval: this.getConnectionRetryInterval
             });
         return token;
+    }
+
+    private hasSufficientRemaing(token: Token): boolean {
+        return token.ratelimitRemaining > this.requestCostPrediction * this.maxConcurrentReqNumber;
     }
 
     public async query<TR, T>(q: string, p: T): Promise<TR> {
@@ -179,18 +183,15 @@ type ResponseException = {
     data: any
 }
 
-const rateLimitQuerySql = `
-query {
-    rateLimit {
-        resetAt
-        remaining
-    }
-}
-`;
-
 const rateLimitQueryStr = `
 rateLimit {
     resetAt
     remaining
+}
+`;
+
+const rateLimitQuerySql = `
+query {
+    ${rateLimitQueryStr}
 }
 `;
