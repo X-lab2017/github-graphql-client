@@ -19,5 +19,14 @@
   "bugs": {
     "url": "https://github.com/openx-lab/github-graphql-client/issues"
   },
-  "homepage": "https://github.com/openx-lab/github-graphql-client#readme"
+  "homepage": "https://github.com/openx-lab/github-graphql-client#readme",
+  "dependencies": {
+    "@octokit/graphql": "^4.0.0",
+    "bunyan": "^1.8.12",
+    "p-wait-for": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/bunyan": "^1.8.6",
+    "@types/node": "^12.7.3"
+  }
 }
