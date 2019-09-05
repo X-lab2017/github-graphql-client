@@ -2,6 +2,10 @@
 
 This client is used to make [GitHub GraphQL(API v4)](https://developer.github.com/v4) query.
 
+## Requirements:
+
+Node.js: ^10.15.3
+
 ## Usage:
 
 Run `npm install -s github-graphql-client` to install the package.
