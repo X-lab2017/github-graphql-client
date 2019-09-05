@@ -3,7 +3,7 @@ import { GitHubClient } from '../src';
 // set timeout to 30s to fit network
 jest.setTimeout(30000);
 
-const token: string = 'e268da08d9cebf6d2b16cdbb3f2b0ed5356b7d0e';
+const token: string = '6281cb1e503c544deec88d5b80131e4dbc5945aa';
 
 describe('GitHub GraphQL Client', () => {
   it('is a class', () => {
@@ -59,13 +59,13 @@ describe('GitHub GraphQL Client', () => {
         }
       }`;
     const expectData = {
-      "repository": {
-        "owner": {
-          "login": owner,
-          "__typename": "Organization"
+      repository: {
+        owner: {
+          login: owner,
+          __typename: 'Organization'
         },
-        "name": name,
-        "createdAt": "2019-09-03T13:32:52Z"
+        name,
+        createdAt: '2019-09-03T13:32:52Z'
       }
     };
     const ret = await client.query(query, { owner, name });
