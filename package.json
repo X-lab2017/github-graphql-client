@@ -40,6 +40,14 @@
   },
   "jest": {
     "preset": "ts-jest",
+    "transform": {
+      ".*": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts)$",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
     "coverageThreshold": {
       "global": {
         "statements": 60,
