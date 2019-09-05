@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "lint": "tslint {src,test}/**/*.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -29,8 +29,22 @@
   },
   "devDependencies": {
     "@types/bunyan": "^1.8.6",
+    "@types/jest": "^24.0.18",
     "@types/node": "^12.7.3",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.0.2",
     "tslint": "^5.19.0",
     "typescript": "^3.6.2"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "coverageThreshold": {
+      "global": {
+        "statements": 60,
+        "branches": 30,
+        "functions": 80,
+        "lines": 60
+      }
+    }
   }
 }

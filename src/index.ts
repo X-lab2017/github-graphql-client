@@ -106,7 +106,7 @@ export class GitHubClient {
       if (this.concurrentReqNumber >= this.maxConcurrentReqNumber) {
         return false;
       }
-      const availableTokens = this.tokens.filter(this.hasSufficientRemaing);
+      const availableTokens = this.tokens.filter((t: Token) => this.hasSufficientRemaing(t));
       if (availableTokens.length === 0) {
         this.logger.warn(`No avialable token found for now, will try later`);
         return false;
