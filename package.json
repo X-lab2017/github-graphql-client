@@ -4,17 +4,19 @@
   "description": "GitHub GraphQL(API v4) client",
   "main": "lib/index.js",
   "scripts": {
+    "build": "tsc",
+    "lint": "tslint {src,test}/**/*.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openx-lab/github-graphql-client.git"
+    "url": "https://github.com/openx-lab/github-graphql-client.git"
   },
   "keywords": [
     "GitHub",
     "GraphQL"
   ],
-  "author": "Frankzhaopku",
+  "author": "Frankzhaopku <syzhao1988@126.com>",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/openx-lab/github-graphql-client/issues"
@@ -27,6 +29,8 @@
   },
   "devDependencies": {
     "@types/bunyan": "^1.8.6",
-    "@types/node": "^12.7.3"
+    "@types/node": "^12.7.3",
+    "tslint": "^5.19.0",
+    "typescript": "^3.6.2"
   }
 }
