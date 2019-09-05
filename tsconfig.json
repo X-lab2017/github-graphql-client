@@ -16,6 +16,7 @@
     "allowUnusedLabels": false,
     "strictPropertyInitialization": false,
     "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "inlineSourceMap": true,

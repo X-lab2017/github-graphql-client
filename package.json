@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "lint": "tslint {src,test}/**/*.ts",
-    "test": "jest --coverage"
+    "test": "jest --coverage --runInBand"
   },
   "repository": {
     "type": "git",
@@ -30,8 +30,10 @@
   "devDependencies": {
     "@types/bunyan": "^1.8.6",
     "@types/jest": "^24.0.18",
+    "@types/nock": "^10.0.3",
     "@types/node": "^12.7.3",
     "jest": "^24.9.0",
+    "nock": "^11.3.1",
     "ts-jest": "^24.0.2",
     "tslint": "^5.19.0",
     "typescript": "^3.6.2"

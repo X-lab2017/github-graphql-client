@@ -1,9 +1,12 @@
+import nock from 'nock';
 import { GitHubClient } from '../src';
 
 // set timeout to 30s to fit network
 jest.setTimeout(30000);
 
-const token: string = '6281cb1e503c544deec88d5b80131e4dbc5945aa';
+const mockData = (response: any, status: number = 200) => {
+  nock('https://api.github.com').post('/graphql').reply(status, response);
+};
 
 describe('GitHub GraphQL Client', () => {
   it('is a class', () => {
@@ -21,7 +24,7 @@ describe('GitHub GraphQL Client', () => {
 
   it('Should call init before query', () => {
     const client = new GitHubClient({
-      tokens: [token]
+      tokens: ['secrect123']
     });
     expect(client.query(``, {})).
       rejects.toEqual(new Error('Client not inited yet! Call `await client.init()` to init.'));
@@ -29,7 +32,15 @@ describe('GitHub GraphQL Client', () => {
 
   it('Query not exist resources', async () => {
     const client = new GitHubClient({
-      tokens: [token]
+      tokens: ['secret123']
+    });
+    mockData({
+      data: {
+        rateLimit: {
+          remaining: 5000,
+          resetAt: new Date().getTime() + 10000
+        }
+      }
     });
     await client.init();
     const query = `query {
@@ -37,13 +48,41 @@ describe('GitHub GraphQL Client', () => {
           name
         }
       }`;
+    mockData({
+      data: {
+        repository: null
+      },
+      errors: [
+        {
+          type: 'NOT_FOUND',
+          path: [
+            'repository'
+          ],
+          locations: [
+            {
+              line: 7,
+              column: 3
+            }
+          ],
+          message: 'Could not resolve to a Repository with the name \'not-gonna-exist\'.'
+        }
+      ]
+    });
     const ret = await client.query(query, {});
     expect(ret).toBeNull();
   });
 
   it('Query a current resource with variables', async () => {
     const client = new GitHubClient({
-      tokens: [token]
+      tokens: ['secret123']
+    });
+    mockData({
+      data: {
+        rateLimit: {
+          remaining: 5000,
+          resetAt: new Date().getTime() + 10000
+        }
+      }
     });
     await client.init();
     const owner = 'openx-lab';
@@ -59,16 +98,23 @@ describe('GitHub GraphQL Client', () => {
         }
       }`;
     const expectData = {
-      repository: {
-        owner: {
-          login: owner,
-          __typename: 'Organization'
+      data: {
+        rateLimit: {
+          remaining: 5000,
+          resetAt: new Date().getTime() + 10000
         },
-        name,
-        createdAt: '2019-09-03T13:32:52Z'
+        repository: {
+          owner: {
+            login: owner,
+            __typename: 'Organization'
+          },
+          name,
+          createdAt: '2019-09-03T13:32:52Z'
+        }
       }
     };
+    mockData(expectData);
     const ret = await client.query(query, { owner, name });
-    expect(ret).toMatchObject(expectData);
+    expect(ret).toMatchObject(expectData.data);
   });
 });
