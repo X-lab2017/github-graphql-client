@@ -1,5 +1,7 @@
 # GitHub GraphQL Client
 
+[![CircleCI](https://circleci.com/gh/openx-lab/github-graphql-client/tree/master.svg?style=svg)](https://circleci.com/gh/openx-lab/github-graphql-client/tree/master)
+
 This client is used to make [GitHub GraphQL(API v4)](https://developer.github.com/v4) query.
 
 ## Requirements:
