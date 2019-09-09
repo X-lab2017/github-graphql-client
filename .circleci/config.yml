@@ -1,5 +1,12 @@
 version: 2.1
 
+only-deploy-tags: &only-deploy-tags
+  filters:
+    tags:
+      only: /v[0-9]+(\.[0-9]+)*/
+    branches:
+      ignore: /.*/
+
 jobs:
   test:
     docker:
@@ -52,10 +59,13 @@ jobs:
 
 workflows:
   version: 2.1
-  build:
+  untagged-build:
     jobs:
       - test
+  tagged-build:
+    jobs:
+      - test: *only-deploy-tags
       - publish:
-          filters:
-            tags:
-              only: /v[0-9]+(\.[0-9]+)*/
+          <<: *only-deploy-tags
+          requires:
+            - test
