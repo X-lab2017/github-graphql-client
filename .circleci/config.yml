@@ -59,10 +59,10 @@ jobs:
 
 workflows:
   version: 2.1
-  untagged-build:
+  untagged-test:
     jobs:
       - test
-  tagged-build:
+  tagged-test-deploy:
     jobs:
       - test: *only-deploy-tags
       - publish:
