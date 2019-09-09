@@ -4,11 +4,11 @@
 
 This client is used to make [GitHub GraphQL(API v4)](https://developer.github.com/v4) query.
 
-## Requirements:
+## Requirements
 
 Node.js: ^10.15.3
 
-## Usage:
+## Usage
 
 Run `npm install -s github-graphql-client` to install the package.
 
@@ -55,19 +55,19 @@ let result = await cient.query(query, {});
 
 This client have several features to make sure you have an excellent GraphQL query experience.
 
-* Multiple token management
+### Multiple token management
 
 As GitHub has [rate limit for single token](https://developer.github.com/v4/guides/resource-limitations/), the client supports multiple tokens in constructor options which can break the rate limit and there is no theoratical limitation if you have enough tokens to use.
 
 And the client will automaticly handle the rate limit and reset time for every single token. To achieve this we need to add rate limit query into every query which is also done automaticly so you do not need to add rate limit in your query.
 
-* Concurrent request management
+### Concurrent request management
 
 The client can make several calls at same time to speed up massive queies a time. You can set a max concurrent request number in constructor options.
 
 The default max concurrent request number is 10, you may set it to 15 or 20 to speed up your queries. But if you have few tokens and a big max concurrent request number, you may trigger [GitHub API abuse detection](https://developer.github.com/v3/#abuse-rate-limits) which will make your token invalid for a while.
 
-* Error handler
+### Error handler
 
 The client will handle any errors occured during a query properly.
 
@@ -79,7 +79,7 @@ If the status code is in `filterStatusCode` array, the query will return any dat
 
 Otherwise, the query will be retried until success or excceed the max retry times.
 
-* Retry handler
+### Retry handler
 
 The client can take a max retry times option in constructor options whose default value is 10. If a query fails and retry may sovle the problem then the client will retry the query until retry time exceed the max retry times.
 
