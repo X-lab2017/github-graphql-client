@@ -1,7 +1,7 @@
 {
-  "name": "github-graphql-client",
-  "version": "0.0.1",
-  "description": "GitHub GraphQL(API v4) client",
+  "name": "github-graphql-v4-client",
+  "version": "0.1.0",
+  "description": "GitHub GraphQL(API v4) client - Multi token, concurrent control, auto retry",
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
@@ -14,7 +14,8 @@
   },
   "keywords": [
     "GitHub",
-    "GraphQL"
+    "GraphQL",
+    "Client"
   ],
   "author": "Frankzhaopku <syzhao1988@126.com>",
   "license": "Apache-2.0",

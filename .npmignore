@@ -1,0 +1,23 @@
+.*.swp
+._*
+.DS_Store
+.git
+.hg
+.npmrc
+.lock-wscript
+.svn
+.wafpickle-*
+config.gypi
+CVS
+npm-debug.log
+
+# src ts files
+src
+# coverage reports
+coverage
+# vscode settings
+.vscode
+# github settings
+.github
+# circleci settings
+.circleci
