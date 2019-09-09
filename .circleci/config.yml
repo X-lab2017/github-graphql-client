@@ -27,10 +27,10 @@ jobs:
       - run: 
         name: Early stop for pull requests
         command: |
-        if [ -n "$CIRCLE_PR_NUMBER" ]; then
-          echo "Nothing to do for forked PRs, so marking this step successful"
-          circleci step halt
-        fi
+          if [ -n "$CIRCLE_PR_NUMBER" ]; then
+            echo "Nothing to do for forked PRs, so marking this step successful"
+            circleci step halt
+          fi
       - checkout
       - run: npm run build
       - run:
