@@ -10,11 +10,11 @@ Node.js: ^10.15.3
 
 ## Usage
 
-Run `npm install -s github-graphql-client` to install the package.
-
+Run `npm install -s github-graphql-v4-client` to install the package.
+ 
 Demo:
 ``` TypeScript
-import { GitHubClient } from "github-graphql-client";
+import { GitHubClient } from "github-graphql-v4-client";
 import Logger = require("bunyan");
 
 let client = new GitHubClient({
@@ -46,9 +46,24 @@ let client = new GitHubClient({
     });
 });
 
-// need to call init first to init the token status
-await client.init();
-let result = await cient.query(query, {});
+async function test_client(query: string) {
+  // need to call init first to init the token status
+  await client.init();
+  let result: any = await client.query(query, {});
+  console.info(result);
+}
+
+let query: string = `{
+  viewer {
+    login
+    url
+    id
+    name
+    bio
+    createdAt
+  }
+}`;
+test_client(query)
 ```
 
 ## Features
